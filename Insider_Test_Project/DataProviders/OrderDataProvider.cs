@@ -11,7 +11,7 @@ namespace Insiders_Test_Project.DataProviders
         public bool InsertOrder(Order order)
         {
             _customerDataProvider.GetCustomerById(order.CustomerId);
-            string query = "INSERT INTO Orders (Id, CreatedDate, CustomerId) VALUES (@Id, @Name, @Email, @PasswordHash)";
+            string query = "INSERT INTO Orders (Id, CreatedDate, CustomerId) VALUES (@Id, @CreatedDate, @CustomerId)";
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
