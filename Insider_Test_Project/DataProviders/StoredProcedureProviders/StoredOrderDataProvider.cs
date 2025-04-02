@@ -1,6 +1,7 @@
 ﻿using Insiders_Test_Project.Models;
 using Microsoft.Data.SqlClient;
 using Insiders_Test_Project.DataProviders.Interfaces;
+using System.Data;
 
 namespace Insiders_Test_Project.DataProviders.StoredProcedureProviders
 {
@@ -12,39 +13,39 @@ namespace Insiders_Test_Project.DataProviders.StoredProcedureProviders
         public bool InsertOrder(Order order)
         {
             _customerDataProvider.GetCustomerById(order.CustomerId);
-            string query = "";
             string storedProcedureName = "";
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
-                using (SqlCommand command = new SqlCommand(query, connection))
+                using (SqlCommand command = new SqlCommand(storedProcedureName, connection))
                 {
+                    command.CommandType = CommandType.StoredProcedure;
                     throw new NotImplementedException();
                 }
             }
         }
         public Order GetOrderById(Guid Id)
         {
-            string query = "";
             string storedProcedureName = "";
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
-                using (SqlCommand command = new SqlCommand(query, connection))
+                using (SqlCommand command = new SqlCommand(storedProcedureName, connection))
                 {
+                    command.CommandType = CommandType.StoredProcedure;
                     throw new NotImplementedException();
                 }
             }
         }
         public ICollection<Order> GetAllOrders()
         {
-            string query = "";
             string storedProcedureName = "";
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
-                using (SqlCommand command = new SqlCommand(query, connection))
+                using (SqlCommand command = new SqlCommand(storedProcedureName, connection))
                 {
+                    command.CommandType = CommandType.StoredProcedure;
                     throw new NotImplementedException();
                 }
             }
@@ -53,13 +54,13 @@ namespace Insiders_Test_Project.DataProviders.StoredProcedureProviders
         {
             GetOrderById(OrderId);
             _productDataProvider.GetProductById(ProductId);
-            string query = "";
             string storedProcedureName = "";
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
-                using (SqlCommand command = new SqlCommand(query, connection))
+                using (SqlCommand command = new SqlCommand(storedProcedureName, connection))
                 {
+                    command.CommandType = CommandType.StoredProcedure;
                     throw new NotImplementedException();
                 }
             }
@@ -68,26 +69,27 @@ namespace Insiders_Test_Project.DataProviders.StoredProcedureProviders
         {
             GetOrderById(OrderId);
             _productDataProvider.GetProductById(ProductId);
-            string query = "";
             string storedProcedureName = "";
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
-                using (SqlCommand command = new SqlCommand(query, connection))
+                using (SqlCommand command = new SqlCommand(storedProcedureName, connection))
                 {
+                    command.CommandType = CommandType.StoredProcedure;
                     throw new NotImplementedException();
                 }
             }
         }
         public bool DeleteOrder(Guid Id)
         {
-            string query = "";
+
             string storedProcedureName = "";
             using (var connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
-                using (var command = new SqlCommand(query, connection))
+                using (SqlCommand command = new SqlCommand(storedProcedureName, connection))
                 {
+                    command.CommandType = CommandType.StoredProcedure;
                     throw new NotImplementedException();
                 }
             }

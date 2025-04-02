@@ -10,62 +10,70 @@ namespace Insiders_Test_Project.DataProviders.StoredProcedureProviders
         private readonly string _connectionString;
         public bool InsertUser(User user)
         {
-            string query = "";
+            
             string storedProcedureName = "";
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
-                using (SqlCommand command = new SqlCommand(query, connection))
+                using (SqlCommand command = new SqlCommand(storedProcedureName, connection))
                 {
+                    command.CommandType = CommandType.StoredProcedure;
                     throw new NotImplementedException();
                 }
             }
         }
         public User GetUserById(Guid Id)
         {
-            string query = "";
+            
             string storedProcedureName = "";
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
-                using (SqlCommand command = new SqlCommand(query, connection))
+                using (SqlCommand command = new SqlCommand(storedProcedureName, connection))
                 {
+                    command.CommandType = CommandType.StoredProcedure;
                     throw new NotImplementedException();
                 }
             }
         }
         public ICollection<User> GetAllUsers()
         {
-            string query = "";
+            
             string storedProcedureName = "";
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
-                using (SqlCommand command = new SqlCommand(query, connection))
+                using (SqlCommand command = new SqlCommand(storedProcedureName, connection))
                 {
+                    command.CommandType = CommandType.StoredProcedure;
                     throw new NotImplementedException();
                 }
             }
         }
         public bool UpdateUser(Guid Id, User newUser)
         {
-            string query = "";
+            
             string storedProcedureName = "";
             using (var connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
-                throw new NotImplementedException();
+                using (SqlCommand command = new SqlCommand(storedProcedureName, connection))
+                {
+                    command.CommandType = CommandType.StoredProcedure;
+                    throw new NotImplementedException();
+                }
             }
         }
         public bool DeleteUser(Guid Id)
         {
-            string query = "";
+            
             string storedProcedureName = "";
             using (var connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
-                using (var command = new SqlCommand(query, connection))
+                using (SqlCommand command = new SqlCommand(storedProcedureName, connection))
                 {
+                    command.CommandType = CommandType.StoredProcedure;
                     throw new NotImplementedException();
                 }
             }

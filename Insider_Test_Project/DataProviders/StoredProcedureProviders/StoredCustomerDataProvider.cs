@@ -1,6 +1,7 @@
 ﻿using Insiders_Test_Project.Models;
 using Microsoft.Data.SqlClient;
 using Insiders_Test_Project.DataProviders.Interfaces;
+using System.Data;
 
 namespace Insiders_Test_Project.DataProviders.StoredProcedureProviders
 {
@@ -11,7 +12,7 @@ namespace Insiders_Test_Project.DataProviders.StoredProcedureProviders
         public bool InsertCustomer(Customer customer)
         {
             _userDataProvider.GetUserById(customer.UserId);
-            string query = "";
+            
             string storedProcedureName = "";
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
@@ -24,42 +25,43 @@ namespace Insiders_Test_Project.DataProviders.StoredProcedureProviders
         }
         public Customer GetCustomerById(Guid Id)
         {
-            string query = "";
+            
             string storedProcedureName = "";
+
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
-                using (SqlCommand command = new SqlCommand(query, connection))
+                using (SqlCommand command = new SqlCommand(storedProcedureName, connection))
                 {
+                    command.CommandType = CommandType.StoredProcedure;
                     throw new NotImplementedException();
                 }
             }
         }
         public ICollection<Customer> GetAllCustomers()
         {
-            string query = "";
+            
             string storedProcedureName = "";
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
-                using (SqlCommand command = new SqlCommand(query, connection))
+                using (SqlCommand command = new SqlCommand(storedProcedureName, connection))
                 {
-                    using (SqlDataReader reader = command.ExecuteReader())
-                    {
-                        throw new NotImplementedException();
-                    }
+                    command.CommandType = CommandType.StoredProcedure;
+                    throw new NotImplementedException();
                 }
             }
         }
         public bool DeleteCustomer(Guid Id)
         {
-            string query = "";
+            
             string storedProcedureName = "";
             using (var connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
-                using (var command = new SqlCommand(query, connection))
+                using (SqlCommand command = new SqlCommand(storedProcedureName, connection))
                 {
+                    command.CommandType = CommandType.StoredProcedure;
                     throw new NotImplementedException();
                 }
             }

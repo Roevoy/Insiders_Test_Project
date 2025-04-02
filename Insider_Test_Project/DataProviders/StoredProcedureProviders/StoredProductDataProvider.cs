@@ -10,61 +10,70 @@ namespace Insiders_Test_Project.DataProviders.StoredProcedureProviders
         private readonly string _connectionString;
         public bool InsertProduct(Product product)
         {
-            string query = "";
+            
             string storedProcedureName = "";
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
-                using (SqlCommand command = new SqlCommand(query, connection))
+                using (SqlCommand command = new SqlCommand(storedProcedureName, connection))
                 {
+                    command.CommandType = CommandType.StoredProcedure;
                     throw new NotImplementedException();
                 }
             }
         }
         public Product GetProductById(Guid Id)
         {
-            string query = "";
+            
             string storedProcedureName = "";
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
-                using (SqlCommand command = new SqlCommand(query, connection))
+                using (SqlCommand command = new SqlCommand(storedProcedureName, connection))
                 {
+                    command.CommandType = CommandType.StoredProcedure;
                     throw new NotImplementedException();
                 }
             }
         }
         public ICollection<Product> GetAllProducts()
         {
-            string query = "";
+            
             string storedProcedureName = "";
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
-                using (SqlCommand command = new SqlCommand(query, connection))
+                using (SqlCommand command = new SqlCommand(storedProcedureName, connection))
                 {
+                    command.CommandType = CommandType.StoredProcedure;
                     throw new NotImplementedException();
                 }
             }
         }
         public bool UpdateProduct(Guid Id, Product newProduct)
         {
-            string query = "";
-            string storedProcedureName = "";
-            using (var connection = new SqlConnection(_connectionString))
-            {
-                throw new NotImplementedException();
-            }
-        }
-        public bool DeleteProduct(Guid Id)
-        {
-            string query = "";
+            
             string storedProcedureName = "";
             using (var connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
-                using (var command = new SqlCommand(query, connection))
+                using (SqlCommand command = new SqlCommand(storedProcedureName, connection))
                 {
+                    command.CommandType = CommandType.StoredProcedure;
+                    throw new NotImplementedException();
+                }
+            }
+        }
+        public bool DeleteProduct(Guid Id)
+        {
+            
+            string storedProcedureName = "";
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
+                using (SqlCommand command = new SqlCommand(storedProcedureName, connection))
+                {
+                    command.CommandType = CommandType.StoredProcedure;
                     throw new NotImplementedException();
                 }
             }
