@@ -1,10 +1,11 @@
-﻿using Insiders_Test_Project.Models;
+﻿using Insiders_Test_Project.DataProviders.Interfaces;
+using Insiders_Test_Project.Models;
 using Microsoft.Data.SqlClient;
 using System.Data;
 
-namespace Insiders_Test_Project.DataProviders
+namespace Insiders_Test_Project.DataProviders.DefaultProviders
 {
-    public class UserDataProvider
+    public class UserDataProvider : IUserDataProvider
     {
         private readonly string _connectionString;
         public bool InsertUser(User user)
@@ -35,13 +36,13 @@ namespace Insiders_Test_Project.DataProviders
                 {
                     command.Parameters.AddWithValue("@Id", Id);
                     using (SqlDataReader reader = command.ExecuteReader())
-                    { 
+                    {
                         if (reader.Read())
                         {
                             User user = new User
                             {
-                                Id = reader.GetGuid(0),        
-                                Name = reader.GetString(1),   
+                                Id = reader.GetGuid(0),
+                                Name = reader.GetString(1),
                                 Email = reader.GetString(2),
                                 PasswordHash = reader.GetString(3)
                             };

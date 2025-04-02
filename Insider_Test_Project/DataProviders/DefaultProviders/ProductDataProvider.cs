@@ -1,10 +1,11 @@
-﻿using Insiders_Test_Project.Models;
+﻿using Insiders_Test_Project.DataProviders.Interfaces;
+using Insiders_Test_Project.Models;
 using Microsoft.Data.SqlClient;
 using System.Data;
 
-namespace Insiders_Test_Project.DataProviders
+namespace Insiders_Test_Project.DataProviders.DefaultProviders
 {
-    public class ProductDataProvider
+    public class ProductDataProvider : IProductDataProvider
     {
         private readonly string _connectionString;
         public bool InsertProduct(Product product)
@@ -72,7 +73,7 @@ namespace Insiders_Test_Project.DataProviders
                             {
                                 Id = reader.GetGuid(0),
                                 Name = reader.GetString(1),
-                                Price= reader.GetDouble(2),
+                                Price = reader.GetDouble(2),
                                 Description = reader.GetString(3)
                             };
                             Products.Add(Product);

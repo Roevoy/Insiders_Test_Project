@@ -1,12 +1,13 @@
-﻿using Insiders_Test_Project.Models;
+﻿using Insiders_Test_Project.DataProviders.Interfaces;
+using Insiders_Test_Project.Models;
 using Microsoft.Data.SqlClient;
 using Microsoft.VisualBasic.ApplicationServices;
 
-namespace Insiders_Test_Project.DataProviders
+namespace Insiders_Test_Project.DataProviders.DefaultProviders
 {
-    public class CustomerDataProvider
+    public class CustomerDataProvider : ICustomerDataProvider
     {
-        private readonly string _connectionString = "Server=имя_сервера;Database=имя_базы_данных;customer Id=имя_пользователя;Password=пароль;";
+        private readonly string _connectionString = "Server=;Database=;customer Id=;Password=;";
         private readonly UserDataProvider _userDataProvider;
         public bool InsertCustomer(Customer customer)
         {
@@ -25,7 +26,7 @@ namespace Insiders_Test_Project.DataProviders
                 }
             }
         }
-        public Customer GetCustomerById(Guid Id) 
+        public Customer GetCustomerById(Guid Id)
         {
             string query = "SELECT Id, UserId FROM Customers WHERE Id = @Id";
             using (SqlConnection connection = new SqlConnection(_connectionString))

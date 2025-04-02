@@ -1,9 +1,10 @@
-﻿using Insiders_Test_Project.Models;
+﻿using Insiders_Test_Project.DataProviders.Interfaces;
+using Insiders_Test_Project.Models;
 using Microsoft.Data.SqlClient;
 
-namespace Insiders_Test_Project.DataProviders
+namespace Insiders_Test_Project.DataProviders.DefaultProviders
 {
-    public class OrderDataProvider
+    public class OrderDataProvider : IOrderDataProvider
     {
         private readonly string _connectionString;
         private readonly CustomerDataProvider _customerDataProvider;
@@ -95,7 +96,7 @@ namespace Insiders_Test_Project.DataProviders
                     command.Parameters.AddWithValue("@ProductId", ProductId);
                     int rowsAffected = command.ExecuteNonQuery();
                     if (rowsAffected == 0) throw new InvalidOperationException("Failed to add the product to the order.");
-                    return true;    
+                    return true;
                 }
             }
         }
