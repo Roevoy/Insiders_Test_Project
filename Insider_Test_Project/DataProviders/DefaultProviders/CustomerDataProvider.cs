@@ -21,7 +21,7 @@ namespace Insiders_Test_Project.DataProviders.DefaultProviders
                     command.Parameters.AddWithValue("@Id", customer.Id);
                     command.Parameters.AddWithValue("@UserId", customer.UserId);
                     int rowsAffected = command.ExecuteNonQuery();
-                    if (rowsAffected == 0) throw new InvalidOperationException("Failed to insert customer to database");
+                    if (rowsAffected == 0) throw new InvalidOperationException("Failed to insert the customer to database");
                     return true;
                 }
             }

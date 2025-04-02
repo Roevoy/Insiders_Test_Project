@@ -20,7 +20,16 @@ namespace Insiders_Test_Project.DataProviders.StoredProcedureProviders
                 using (SqlCommand command = new SqlCommand(storedProcedureName, connection))
                 {
                     command.CommandType = CommandType.StoredProcedure;
-                    throw new NotImplementedException();
+                    command.Parameters.Add(new SqlParameter("@Id", SqlDbType.UniqueIdentifier));
+                    command.Parameters["@Id"].Value = order.Id;
+                    command.Parameters.Add(new SqlParameter("@CustomerId", SqlDbType.UniqueIdentifier));
+                    command.Parameters["@CustomerId"].Value = order.CustomerId;
+                    command.Parameters.Add(new SqlParameter("@CreatedDate", SqlDbType.DateTime));
+                    command.Parameters["@CreatedDate"].Value = order.CreatedDate;
+                    command.Parameters.Add(new SqlParameter("@OutputParameter", SqlDbType.Int));
+                    command.Parameters["@OutputParameter"].Direction = ParameterDirection.ReturnValue;
+                    command.ExecuteNonQuery();
+                    return (int)command.Parameters["@OutputParameter"].Value == 0;
                 }
             }
         }
@@ -33,7 +42,22 @@ namespace Insiders_Test_Project.DataProviders.StoredProcedureProviders
                 using (SqlCommand command = new SqlCommand(storedProcedureName, connection))
                 {
                     command.CommandType = CommandType.StoredProcedure;
-                    throw new NotImplementedException();
+                    command.Parameters.Add(new SqlParameter("@Id", SqlDbType.UniqueIdentifier));
+                    command.Parameters["@Id"].Value = Id;
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            var order = new Order()
+                            {
+                                Id = reader.GetGuid(0),
+                                CustomerId = reader.GetGuid(1),
+                                CreatedDate = reader.GetDateTime(2)
+                            };
+                            return order;
+                        }
+                        else throw new KeyNotFoundException($"Order with ID {Id} is not found.");
+                    }
                 }
             }
         }
@@ -46,7 +70,21 @@ namespace Insiders_Test_Project.DataProviders.StoredProcedureProviders
                 using (SqlCommand command = new SqlCommand(storedProcedureName, connection))
                 {
                     command.CommandType = CommandType.StoredProcedure;
-                    throw new NotImplementedException();
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        var orders = new List<Order>();
+                        while (reader.Read())
+                        {
+                            var order = new Order
+                            {
+                                Id = reader.GetGuid(0),
+                                CustomerId = reader.GetGuid(1),
+                                CreatedDate = reader.GetDateTime(2)
+                            };
+                            orders.Add(order);
+                        }
+                        return orders;
+                    }
                 }
             }
         }
@@ -61,7 +99,14 @@ namespace Insiders_Test_Project.DataProviders.StoredProcedureProviders
                 using (SqlCommand command = new SqlCommand(storedProcedureName, connection))
                 {
                     command.CommandType = CommandType.StoredProcedure;
-                    throw new NotImplementedException();
+                    command.Parameters.Add(new SqlParameter("@OrderId", SqlDbType.UniqueIdentifier));
+                    command.Parameters["@OrderId"].Value = OrderId;
+                    command.Parameters.Add(new SqlParameter("@ProductId", SqlDbType.UniqueIdentifier));
+                    command.Parameters["@ProductId"].Value = ProductId;
+                    command.Parameters.Add(new SqlParameter("@OutputParameter", SqlDbType.Int));
+                    command.Parameters["@OutputParameter"].Direction = ParameterDirection.ReturnValue;
+                    command.ExecuteNonQuery();
+                    return (int)command.Parameters["@OutputParameter"].Value == 0;
                 }
             }
         }
@@ -76,7 +121,14 @@ namespace Insiders_Test_Project.DataProviders.StoredProcedureProviders
                 using (SqlCommand command = new SqlCommand(storedProcedureName, connection))
                 {
                     command.CommandType = CommandType.StoredProcedure;
-                    throw new NotImplementedException();
+                    command.Parameters.Add(new SqlParameter("@OrderId", SqlDbType.UniqueIdentifier));
+                    command.Parameters["@OrderId"].Value = OrderId;
+                    command.Parameters.Add(new SqlParameter("@ProductId", SqlDbType.UniqueIdentifier));
+                    command.Parameters["@ProductId"].Value = ProductId;
+                    command.Parameters.Add(new SqlParameter("@OutputParameter", SqlDbType.Int));
+                    command.Parameters["@OutputParameter"].Direction = ParameterDirection.ReturnValue;
+                    command.ExecuteNonQuery();
+                    return (int)command.Parameters["@OutputParameter"].Value == 0;
                 }
             }
         }
@@ -90,7 +142,12 @@ namespace Insiders_Test_Project.DataProviders.StoredProcedureProviders
                 using (SqlCommand command = new SqlCommand(storedProcedureName, connection))
                 {
                     command.CommandType = CommandType.StoredProcedure;
-                    throw new NotImplementedException();
+                    command.Parameters.Add(new SqlParameter("@Id", SqlDbType.UniqueIdentifier));
+                    command.Parameters["@Id"].Value= Id;
+                    command.Parameters.Add(new SqlParameter("@OutputParameter", SqlDbType.Int));
+                    command.Parameters["@OutputParameter"].Direction = ParameterDirection.ReturnValue;
+                    command.ExecuteNonQuery();
+                    return (int)command.Parameters["@OutputParameter"].Value == 0;
                 }
             }
         }

@@ -7,7 +7,7 @@ namespace Insiders_Test_Project.DataProviders.StoredProcedureProviders
 {
     public class StoredCustomerDataProvider : ICustomerDataProvider
     {
-        private readonly string _connectionString = "Server=;Database=;customer Id=;Password=;";
+        private readonly string _connectionString = "Server=;Database=;userId=;Password=;";
         private readonly IUserDataProvider _userDataProvider;
         public bool InsertCustomer(Customer customer)
         {
@@ -19,7 +19,19 @@ namespace Insiders_Test_Project.DataProviders.StoredProcedureProviders
                 connection.Open();
                 using (SqlCommand command = new SqlCommand(storedProcedureName, connection))
                 {
-                    throw new NotImplementedException();
+                    command.CommandType = CommandType.StoredProcedure;
+
+                    command.Parameters.Add(new SqlParameter("@Id", SqlDbType.UniqueIdentifier));
+                    command.Parameters["@Id"].Value = customer.Id;
+                    command.Parameters.Add(new SqlParameter("@UserId", SqlDbType.UniqueIdentifier));
+                    command.Parameters["@UserId"].Value = customer.UserId;
+
+                    SqlParameter outputParameter = new SqlParameter("@OutputParameter", SqlDbType.Int);
+                    outputParameter.Direction = ParameterDirection.ReturnValue;
+                    command.Parameters.Add(outputParameter);
+
+                    command.ExecuteNonQuery();
+                    return (int)command.Parameters["@OutputParameter"].Value == 0;
                 }
             }
         }
@@ -34,7 +46,25 @@ namespace Insiders_Test_Project.DataProviders.StoredProcedureProviders
                 using (SqlCommand command = new SqlCommand(storedProcedureName, connection))
                 {
                     command.CommandType = CommandType.StoredProcedure;
-                    throw new NotImplementedException();
+                    command.Parameters.Add(new SqlParameter("@Id", SqlDbType.UniqueIdentifier));
+                    command.Parameters["@Id"].Value = Id;
+
+                    command.Parameters.Add(new SqlParameter("@OutputParameter", SqlDbType.Int));
+                    command.Parameters["@OutputParameter"].Direction = ParameterDirection.ReturnValue;
+
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            var customer = new Customer
+                            {
+                                Id = reader.GetGuid(1),
+                                UserId = reader.GetGuid(2)
+                            };
+                            return customer;
+                        }
+                        else throw new KeyNotFoundException($"Customer with ID {Id} is not found.");
+                    }
                 }
             }
         }
@@ -48,7 +78,20 @@ namespace Insiders_Test_Project.DataProviders.StoredProcedureProviders
                 using (SqlCommand command = new SqlCommand(storedProcedureName, connection))
                 {
                     command.CommandType = CommandType.StoredProcedure;
-                    throw new NotImplementedException();
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        var customers = new List<Customer>();
+                        while (reader.Read())
+                        {
+                            Customer customer = new Customer
+                            {
+                                Id = reader.GetGuid(1),
+                                UserId = reader.GetGuid(2)
+                            };
+                            customers.Add(customer);
+                        }
+                        return customers;
+                    }
                 }
             }
         }
@@ -62,7 +105,12 @@ namespace Insiders_Test_Project.DataProviders.StoredProcedureProviders
                 using (SqlCommand command = new SqlCommand(storedProcedureName, connection))
                 {
                     command.CommandType = CommandType.StoredProcedure;
-                    throw new NotImplementedException();
+                    command.Parameters.Add(new SqlParameter("@Id", SqlDbType.UniqueIdentifier));
+                    command.Parameters["@Id"].Value = Id;
+                    command.Parameters.Add(new SqlParameter("@OutputParameter", SqlDbType.Int));
+                    command.Parameters["@OutputParameter"].Direction = ParameterDirection.ReturnValue;
+                    command.ExecuteNonQuery();
+                    return (int)command.Parameters["@OutputParameter"].Value == 0;
                 }
             }
         }

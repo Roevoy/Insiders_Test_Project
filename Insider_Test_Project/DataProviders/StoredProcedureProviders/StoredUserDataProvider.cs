@@ -10,7 +10,6 @@ namespace Insiders_Test_Project.DataProviders.StoredProcedureProviders
         private readonly string _connectionString;
         public bool InsertUser(User user)
         {
-            
             string storedProcedureName = "";
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
@@ -27,11 +26,10 @@ namespace Insiders_Test_Project.DataProviders.StoredProcedureProviders
                     command.Parameters.Add(new SqlParameter("@PasswordHash", SqlDbType.NVarChar));
                     command.Parameters["@PasswordHash"].Value = user.PasswordHash;
 
-                    SqlParameter outputParam = new SqlParameter("@OutputParameter", SqlDbType.Int);
-                    outputParam.Direction = ParameterDirection.Output;
-                    command.Parameters.Add(outputParam);
+                    SqlParameter response = new SqlParameter("@OutputParameter", SqlDbType.Int);
+                    response.Direction = ParameterDirection.ReturnValue;
+                    command.Parameters.Add(response);
 
-                    connection.Open();
                     command.ExecuteNonQuery();
 
                     int result = (int)command.Parameters["@OutputParameter"].Value;
@@ -66,7 +64,6 @@ namespace Insiders_Test_Project.DataProviders.StoredProcedureProviders
                         {
                             throw new KeyNotFoundException($"User with ID {Id} is not found.");
                         }
-
                     }
                 }
             }
@@ -81,7 +78,7 @@ namespace Insiders_Test_Project.DataProviders.StoredProcedureProviders
                 using (SqlCommand command = new SqlCommand(storedProcedureName, connection))
                 {
                     command.CommandType = CommandType.StoredProcedure;
-                    using SqlDataReader reader = command.ExecuteReader();
+                    using (SqlDataReader reader = command.ExecuteReader())
                     {
                         var users = new List<User>();
                         while (reader.Read())
@@ -111,6 +108,8 @@ namespace Insiders_Test_Project.DataProviders.StoredProcedureProviders
                 {
                     command.CommandType = CommandType.StoredProcedure;
 
+                    command.Parameters.Add(new SqlParameter("@Id", SqlDbType.UniqueIdentifier));
+                    command.Parameters["@Id"].Value = Id;
                     command.Parameters.Add(new SqlParameter("@Name", SqlDbType.NVarChar));
                     command.Parameters["@Name"].Value = newUser.Name;
                     command.Parameters.Add(new SqlParameter("@Email", SqlDbType.NVarChar));
@@ -119,10 +118,9 @@ namespace Insiders_Test_Project.DataProviders.StoredProcedureProviders
                     command.Parameters["@PasswordHash"].Value = newUser.PasswordHash;
 
                     SqlParameter outputParam = new SqlParameter("@OutputParameter", SqlDbType.Int);
-                    outputParam.Direction = ParameterDirection.Output;
+                    outputParam.Direction = ParameterDirection.ReturnValue;
                     command.Parameters.Add(outputParam);
 
-                    connection.Open();
                     command.ExecuteNonQuery();
 
                     int result = (int)command.Parameters["@OutputParameter"].Value;
@@ -145,10 +143,9 @@ namespace Insiders_Test_Project.DataProviders.StoredProcedureProviders
                     command.Parameters["@Id"].Value = Id;
 
                     SqlParameter outputParam = new SqlParameter("@OutputParameter", SqlDbType.Int);
-                    outputParam.Direction = ParameterDirection.Output;
+                    outputParam.Direction = ParameterDirection.ReturnValue;
                     command.Parameters.Add(outputParam);
 
-                    connection.Open();
                     command.ExecuteNonQuery();
 
                     int result = (int)command.Parameters["@OutputParameter"].Value;
