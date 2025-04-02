@@ -17,7 +17,7 @@ namespace Insiders_Test_Project.DataProviders.StoredProcedureProviders
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
-                using (SqlCommand command = new SqlCommand(query, connection))
+                using (SqlCommand command = new SqlCommand(storedProcedureName, connection))
                 {
                     throw new NotImplementedException();
                 }

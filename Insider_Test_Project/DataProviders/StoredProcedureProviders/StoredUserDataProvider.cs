@@ -110,7 +110,23 @@ namespace Insiders_Test_Project.DataProviders.StoredProcedureProviders
                 using (SqlCommand command = new SqlCommand(storedProcedureName, connection))
                 {
                     command.CommandType = CommandType.StoredProcedure;
-                    throw new NotImplementedException();
+
+                    command.Parameters.Add(new SqlParameter("@Name", SqlDbType.NVarChar));
+                    command.Parameters["@Name"].Value = newUser.Name;
+                    command.Parameters.Add(new SqlParameter("@Email", SqlDbType.NVarChar));
+                    command.Parameters["@Email"].Value = newUser.Email;
+                    command.Parameters.Add(new SqlParameter("@PasswordHash", SqlDbType.NVarChar));
+                    command.Parameters["@PasswordHash"].Value = newUser.PasswordHash;
+
+                    SqlParameter outputParam = new SqlParameter("@OutputParameter", SqlDbType.Int);
+                    outputParam.Direction = ParameterDirection.Output;
+                    command.Parameters.Add(outputParam);
+
+                    connection.Open();
+                    command.ExecuteNonQuery();
+
+                    int result = (int)command.Parameters["@OutputParameter"].Value;
+                    return (result == 0);
                 }
             }
         }
@@ -124,7 +140,19 @@ namespace Insiders_Test_Project.DataProviders.StoredProcedureProviders
                 using (SqlCommand command = new SqlCommand(storedProcedureName, connection))
                 {
                     command.CommandType = CommandType.StoredProcedure;
-                    throw new NotImplementedException();
+
+                    command.Parameters.Add(new SqlParameter("@Id", SqlDbType.UniqueIdentifier));
+                    command.Parameters["@Id"].Value = Id;
+
+                    SqlParameter outputParam = new SqlParameter("@OutputParameter", SqlDbType.Int);
+                    outputParam.Direction = ParameterDirection.Output;
+                    command.Parameters.Add(outputParam);
+
+                    connection.Open();
+                    command.ExecuteNonQuery();
+
+                    int result = (int)command.Parameters["@OutputParameter"].Value;
+                    return (result == 0);
                 }
             }
         }
