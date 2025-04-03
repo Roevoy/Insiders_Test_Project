@@ -2,12 +2,13 @@
 using Microsoft.Data.SqlClient;
 using Insiders_Test_Project.DataProviders.Interfaces;
 using System.Data;
+using WinFormProject1;
 
 namespace Insiders_Test_Project.DataProviders.StoredProcedureProviders
 {
     public class StoredCustomerDataProvider : ICustomerDataProvider
     {
-        private readonly string _connectionString = "Server=;Database=;userId=;Password=;";
+        private readonly string _connectionString = Program.ConnectionString;
         private readonly IUserDataProvider _userDataProvider;
         public bool InsertCustomer(Customer customer)
         {

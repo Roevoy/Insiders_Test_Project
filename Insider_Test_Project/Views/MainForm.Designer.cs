@@ -28,12 +28,33 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Text = "Form1";
+            UsersButton = new Button();
+            SuspendLayout();
+            // 
+            // UsersButton
+            // 
+            UsersButton.Location = new Point(649, 12);
+            UsersButton.Name = "UsersButton";
+            UsersButton.Size = new Size(139, 30);
+            UsersButton.TabIndex = 0;
+            UsersButton.Text = "Users";
+            UsersButton.UseVisualStyleBackColor = true;
+            UsersButton.Click += UsersButton_Click;
+            // 
+            // MainForm
+            // 
+            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(800, 450);
+            Controls.Add(UsersButton);
+            Name = "MainForm";
+            Text = "Main";
+            Load += MainForm_Load;
+            ResumeLayout(false);
         }
 
         #endregion
+
+        private Button UsersButton;
     }
 }

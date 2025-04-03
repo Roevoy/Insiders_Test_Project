@@ -2,12 +2,13 @@
 using Microsoft.Data.SqlClient;
 using Insiders_Test_Project.DataProviders.Interfaces;
 using System.Data;
+using WinFormProject1;
 
 namespace Insiders_Test_Project.DataProviders.StoredProcedureProviders
 {
     public class StoredOrderDataProvider : IOrderDataProvider
     {
-        private readonly string _connectionString;
+        private readonly string _connectionString = Program.ConnectionString;
         private readonly ICustomerDataProvider _customerDataProvider;
         private readonly IProductDataProvider _productDataProvider;
         public bool InsertOrder(Order order)

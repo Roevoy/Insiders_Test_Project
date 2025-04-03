@@ -2,15 +2,16 @@
 using Microsoft.Data.SqlClient;
 using System.Data;
 using Insiders_Test_Project.DataProviders.Interfaces;
+using WinFormProject1;
 
 namespace Insiders_Test_Project.DataProviders.StoredProcedureProviders
 {
     public class StoredUserDataProvider : IUserDataProvider
     {
-        private readonly string _connectionString;
+        private readonly string _connectionString = Program.ConnectionString;
         public bool InsertUser(User user)
         {
-            string storedProcedureName = "";
+            string storedProcedureName = "InsertUser";
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
@@ -71,7 +72,7 @@ namespace Insiders_Test_Project.DataProviders.StoredProcedureProviders
         public ICollection<User> GetAllUsers()
         {
             
-            string storedProcedureName = "";
+            string storedProcedureName = "GetAllUsers";
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
@@ -100,7 +101,7 @@ namespace Insiders_Test_Project.DataProviders.StoredProcedureProviders
         public bool UpdateUser(Guid Id, User newUser)
         {
             
-            string storedProcedureName = "";
+            string storedProcedureName = "UpdateUser";
             using (var connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
@@ -130,8 +131,7 @@ namespace Insiders_Test_Project.DataProviders.StoredProcedureProviders
         }
         public bool DeleteUser(Guid Id)
         {
-            
-            string storedProcedureName = "";
+            string storedProcedureName = "DeleteUser";
             using (var connection = new SqlConnection(_connectionString))
             {
                 connection.Open();

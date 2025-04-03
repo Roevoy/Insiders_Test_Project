@@ -2,12 +2,13 @@
 using Microsoft.Data.SqlClient;
 using System.Data;
 using Insiders_Test_Project.DataProviders.Interfaces;
+using WinFormProject1;
 
 namespace Insiders_Test_Project.DataProviders.StoredProcedureProviders
 {
     public class StoredProductDataProvider : IProductDataProvider
     {
-        private readonly string _connectionString;
+        private readonly string _connectionString = Program.ConnectionString;
         public bool InsertProduct(Product product)
         {
             

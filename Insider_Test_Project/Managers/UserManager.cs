@@ -1,6 +1,39 @@
-﻿namespace Insiders_Test_Project.Managers
+﻿using Insiders_Test_Project.DataProviders.Interfaces;
+using Insiders_Test_Project.Models;
+
+namespace Insiders_Test_Project.Managers
 {
     public class UserManager
     {
+        private readonly IUserDataProvider _userDataProvider;
+        public UserManager (IUserDataProvider userDataProvider)
+        {
+            _userDataProvider = userDataProvider;
+        }
+        public Guid CreateUser(string Name, string Email, string Password) 
+        {
+            User user = new User()
+            {
+                Id = Guid.NewGuid(),
+                Name = Name,
+                Email = Email,
+                PasswordHash = BCrypt.Net.BCrypt.HashPassword(Password)
+            };
+            _userDataProvider.InsertUser(user);
+            return user.Id;
+        }
+        public bool DeleteUser(Guid UserId)
+        {
+            return _userDataProvider.DeleteUser(UserId);
+        }
+        public ICollection<User> GetAllUsers()
+        {
+            return _userDataProvider.GetAllUsers();
+        }
+        public bool Updateuser(Guid UserId, User user)
+        {
+            return _userDataProvider.UpdateUser(UserId, user);
+        }
+
     }
 }
