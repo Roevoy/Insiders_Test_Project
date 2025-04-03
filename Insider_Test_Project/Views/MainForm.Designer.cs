@@ -37,7 +37,7 @@
             // 
             UsersButton.Location = new Point(12, 21);
             UsersButton.Name = "UsersButton";
-            UsersButton.Size = new Size(188, 85);
+            UsersButton.Size = new Size(115, 53);
             UsersButton.TabIndex = 0;
             UsersButton.Text = "Users";
             UsersButton.UseVisualStyleBackColor = true;
@@ -45,9 +45,9 @@
             // 
             // button1
             // 
-            button1.Location = new Point(219, 21);
+            button1.Location = new Point(201, 21);
             button1.Name = "button1";
-            button1.Size = new Size(179, 85);
+            button1.Size = new Size(117, 53);
             button1.TabIndex = 1;
             button1.Text = "Orders";
             button1.UseVisualStyleBackColor = true;
@@ -55,9 +55,9 @@
             // 
             // button2
             // 
-            button2.Location = new Point(124, 123);
+            button2.Location = new Point(103, 96);
             button2.Name = "button2";
-            button2.Size = new Size(172, 94);
+            button2.Size = new Size(119, 56);
             button2.TabIndex = 2;
             button2.Text = "Taxrate";
             button2.UseVisualStyleBackColor = true;
@@ -67,7 +67,7 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(416, 249);
+            ClientSize = new Size(330, 167);
             Controls.Add(button2);
             Controls.Add(button1);
             Controls.Add(UsersButton);
