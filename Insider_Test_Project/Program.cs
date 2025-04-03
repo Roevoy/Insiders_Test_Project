@@ -21,7 +21,7 @@ namespace WinFormProject1
             container.Register<ICustomerDataProvider, StoredCustomerDataProvider>();
             container.Register<IProductDataProvider, StoredProductDataProvider>();
             container.Register<IOrderDataProvider, StoredOrderDataProvider>();
-            container.Register<MainForm>(() => new MainForm(container.Resolve<UserManager>()));
+            container.Register<MainForm>(() => new MainForm(container.Resolve<UserManager>(), container.Resolve<OrderManager>()));
             container.Register<UserManager>(() => new UserManager(container.Resolve<IUserDataProvider>()));
             container.Register<CustomerManager>(() => new CustomerManager(container.Resolve<ICustomerDataProvider>()));
             container.Register<ProductManager>(() => new ProductManager(container.Resolve<IProductDataProvider>()));

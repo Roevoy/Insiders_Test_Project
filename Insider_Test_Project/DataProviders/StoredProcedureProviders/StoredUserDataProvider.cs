@@ -40,7 +40,7 @@ namespace Insiders_Test_Project.DataProviders.StoredProcedureProviders
         }
         public User GetUserById(Guid Id)
         {
-            string storedProcedureName = "";
+            string storedProcedureName = "GetUserById";
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
@@ -48,6 +48,7 @@ namespace Insiders_Test_Project.DataProviders.StoredProcedureProviders
                 {
                     command.CommandType = CommandType.StoredProcedure;
                     command.Parameters.Add(new SqlParameter("@Id", SqlDbType.UniqueIdentifier));
+                    command.Parameters["@Id"].Value =Id;
                     using SqlDataReader reader = command.ExecuteReader();
                     {
                         if (reader.Read())

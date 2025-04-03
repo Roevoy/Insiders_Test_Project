@@ -26,6 +26,10 @@ namespace Insiders_Test_Project.Managers
         {
             return _userDataProvider.DeleteUser(UserId);
         }
+        public User GetUser (Guid Id)
+        {
+            return _userDataProvider.GetUserById(Id);
+        }
         public ICollection<User> GetAllUsers()
         {
             return _userDataProvider.GetAllUsers();

@@ -33,6 +33,7 @@
             UsersGridView = new DataGridView();
             ChangeUserBtn = new Button();
             DeleteUserBtn = new Button();
+            button1 = new Button();
             ((System.ComponentModel.ISupportInitialize)UsersGridView).BeginInit();
             SuspendLayout();
             // 
@@ -44,6 +45,7 @@
             FindUserBtn.TabIndex = 0;
             FindUserBtn.Text = "Find";
             FindUserBtn.UseVisualStyleBackColor = true;
+            FindUserBtn.Click += FindUserBtn_Click;
             // 
             // AddUserBtn
             // 
@@ -73,6 +75,7 @@
             ChangeUserBtn.TabIndex = 0;
             ChangeUserBtn.Text = "Change";
             ChangeUserBtn.UseVisualStyleBackColor = true;
+            ChangeUserBtn.Click += ChangeUserBtn_Click;
             // 
             // DeleteUserBtn
             // 
@@ -85,11 +88,22 @@
             DeleteUserBtn.UseVisualStyleBackColor = true;
             DeleteUserBtn.Click += DeleteUserBtn_Click;
             // 
+            // button1
+            // 
+            button1.Location = new Point(579, 145);
+            button1.Name = "button1";
+            button1.Size = new Size(116, 33);
+            button1.TabIndex = 2;
+            button1.Text = "Refresh";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
+            // 
             // UserForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(707, 446);
+            Controls.Add(button1);
             Controls.Add(UsersGridView);
             Controls.Add(AddUserBtn);
             Controls.Add(DeleteUserBtn);
@@ -109,5 +123,6 @@
         private DataGridView UsersGridView;
         private Button ChangeUserBtn;
         private Button DeleteUserBtn;
+        private Button button1;
     }
 }

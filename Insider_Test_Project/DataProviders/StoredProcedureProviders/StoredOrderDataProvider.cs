@@ -9,11 +9,8 @@ namespace Insiders_Test_Project.DataProviders.StoredProcedureProviders
     public class StoredOrderDataProvider : IOrderDataProvider
     {
         private readonly string _connectionString = Program.ConnectionString;
-        private readonly ICustomerDataProvider _customerDataProvider;
-        private readonly IProductDataProvider _productDataProvider;
         public bool InsertOrder(Order order)
         {
-            _customerDataProvider.GetCustomerById(order.CustomerId);
             string storedProcedureName = "InsertOrder";
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
@@ -28,7 +25,7 @@ namespace Insiders_Test_Project.DataProviders.StoredProcedureProviders
                     command.Parameters.Add(new SqlParameter("@CreatedDate", SqlDbType.DateTime));
                     command.Parameters["@CreatedDate"].Value = order.CreatedDate;
                     command.Parameters.Add(new SqlParameter("@OutputParameter", SqlDbType.Int));
-                    command.Parameters["@OutputParameter"].Direction = ParameterDirection.ReturnValue;
+                    command.Parameters["@OutputParameter"].Direction = ParameterDirection.Output;
                     command.ExecuteNonQuery();
                     return (int)command.Parameters["@OutputParameter"].Value == 0;
                 }
@@ -91,8 +88,6 @@ namespace Insiders_Test_Project.DataProviders.StoredProcedureProviders
         }
         public bool AddProduct(Guid OrderId, Guid ProductId)
         {
-            GetOrderById(OrderId);
-            _productDataProvider.GetProductById(ProductId);
             string storedProcedureName = "AddProduct";
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
@@ -113,8 +108,6 @@ namespace Insiders_Test_Project.DataProviders.StoredProcedureProviders
         }
         public bool RemoveProduct(Guid OrderId, Guid ProductId)
         {
-            GetOrderById(OrderId);
-            _productDataProvider.GetProductById(ProductId);
             string storedProcedureName = "RemoveProduct";
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
@@ -146,7 +139,7 @@ namespace Insiders_Test_Project.DataProviders.StoredProcedureProviders
                     command.Parameters.Add(new SqlParameter("@Id", SqlDbType.UniqueIdentifier));
                     command.Parameters["@Id"].Value= Id;
                     command.Parameters.Add(new SqlParameter("@OutputParameter", SqlDbType.Int));
-                    command.Parameters["@OutputParameter"].Direction = ParameterDirection.ReturnValue;
+                    command.Parameters["@OutputParameter"].Direction = ParameterDirection.Output;
                     command.ExecuteNonQuery();
                     return (int)command.Parameters["@OutputParameter"].Value == 0;
                 }

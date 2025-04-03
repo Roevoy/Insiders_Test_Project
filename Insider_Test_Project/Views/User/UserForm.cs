@@ -1,6 +1,5 @@
-﻿using Insiders_Test_Project.DataProviders.Interfaces;
-using Insiders_Test_Project.Managers;
-using Insiders_Test_Project.Models;
+﻿using Insiders_Test_Project.Managers;
+using Insiders_Test_Project.Views.User;
 
 namespace Insiders_Test_Project.Views
 {
@@ -13,6 +12,7 @@ namespace Insiders_Test_Project.Views
             InitializeComponent();
             this.Load += UserForm_Load;
             this.UsersGridView.SelectionChanged += UsersGridView_SelectionChanged;
+            this.DeleteUserBtn.Click += DeleteUserBtn_Click;
         }
         private void UserForm_Load(object sender, EventArgs e)
         {
@@ -33,19 +33,52 @@ namespace Insiders_Test_Project.Views
         }
         private void DeleteUserBtn_Click(object sender, EventArgs e)
         {
-            if (UsersGridView.SelectedRows.Count == 0)
+            try
             {
-                var user = (User)UsersGridView.SelectedRows[0].DataBoundItem;
-                _userManager.DeleteUser(user.Id);
-                UsersGridView.DataSource = null;
-                UsersGridView.DataSource = _userManager.GetAllUsers();
-                DeleteUserBtn.Enabled = false;
+
+                if (UsersGridView.SelectedRows.Count == 1)
+                {
+                    var selectedRow = UsersGridView.SelectedRows[0];
+                    var userId = (Guid)selectedRow.Cells["Id"].Value;
+                    _userManager.DeleteUser(userId);
+                    UsersGridView.DataSource = _userManager.GetAllUsers();
+                    DeleteUserBtn.Enabled = false;
+                }
             }
+            catch (Exception ex) {MessageBox.Show(ex.Message); }
         }
 
         private void AddUserBtn_Click(object sender, EventArgs e)
         {
-            
+            var createUserForm = new CreateUserForm(UsersGridView, _userManager);
+            createUserForm.ShowDialog();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            UsersGridView.DataSource = _userManager.GetAllUsers();
+        }
+
+        private void ChangeUserBtn_Click(object sender, EventArgs e)
+        {
+            try
+            {
+
+            var selectedRow = UsersGridView.SelectedRows[0];
+            var userId = (Guid)selectedRow.Cells["Id"].Value;
+            var createUserForm = new UpdateUserForm(_userManager, userId);
+            createUserForm.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);    
+            }
+        }
+
+        private void FindUserBtn_Click(object sender, EventArgs e)
+        {
+            var findUserForm = new FindUserForm(_userManager, UsersGridView);
+            findUserForm.ShowDialog();
         }
     }
 }
