@@ -14,7 +14,7 @@ namespace Insiders_Test_Project.DataProviders.StoredProcedureProviders
         {
             _userDataProvider.GetUserById(customer.UserId);
             
-            string storedProcedureName = "";
+            string storedProcedureName = "InsertCustomer";
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
@@ -39,7 +39,7 @@ namespace Insiders_Test_Project.DataProviders.StoredProcedureProviders
         public Customer GetCustomerById(Guid Id)
         {
             
-            string storedProcedureName = "";
+            string storedProcedureName = "GetCustomerById";
 
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
@@ -72,7 +72,7 @@ namespace Insiders_Test_Project.DataProviders.StoredProcedureProviders
         public ICollection<Customer> GetAllCustomers()
         {
             
-            string storedProcedureName = "";
+            string storedProcedureName = "GetAllCustomers";
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
@@ -99,7 +99,7 @@ namespace Insiders_Test_Project.DataProviders.StoredProcedureProviders
         public bool DeleteCustomer(Guid Id)
         {
             
-            string storedProcedureName = "";
+            string storedProcedureName = "DeleteCustomer";
             using (var connection = new SqlConnection(_connectionString))
             {
                 connection.Open();

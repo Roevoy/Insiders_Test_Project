@@ -12,7 +12,7 @@ namespace Insiders_Test_Project.DataProviders.StoredProcedureProviders
         public bool InsertProduct(Product product)
         {
             
-            string storedProcedureName = "";
+            string storedProcedureName = "InsertProduct";
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
@@ -37,7 +37,7 @@ namespace Insiders_Test_Project.DataProviders.StoredProcedureProviders
         public Product GetProductById(Guid Id)
         {
             
-            string storedProcedureName = "";
+            string storedProcedureName = "GetProductById";
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
@@ -67,7 +67,7 @@ namespace Insiders_Test_Project.DataProviders.StoredProcedureProviders
         public ICollection<Product> GetAllProducts()
         {
             
-            string storedProcedureName = "";
+            string storedProcedureName = "GetAllProducts";
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
@@ -96,7 +96,7 @@ namespace Insiders_Test_Project.DataProviders.StoredProcedureProviders
         public bool UpdateProduct(Guid Id, Product newProduct)
         {
             
-            string storedProcedureName = "";
+            string storedProcedureName = "UpdateProduct";
             using (var connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
@@ -126,7 +126,7 @@ namespace Insiders_Test_Project.DataProviders.StoredProcedureProviders
         public bool DeleteProduct(Guid Id)
         {
             
-            string storedProcedureName = "";
+            string storedProcedureName = "DeleteProduct";
             using (var connection = new SqlConnection(_connectionString))
             {
                 connection.Open();

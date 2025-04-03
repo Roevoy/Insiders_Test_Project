@@ -14,7 +14,7 @@ namespace Insiders_Test_Project.DataProviders.StoredProcedureProviders
         public bool InsertOrder(Order order)
         {
             _customerDataProvider.GetCustomerById(order.CustomerId);
-            string storedProcedureName = "";
+            string storedProcedureName = "InsertOrder";
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
@@ -36,7 +36,7 @@ namespace Insiders_Test_Project.DataProviders.StoredProcedureProviders
         }
         public Order GetOrderById(Guid Id)
         {
-            string storedProcedureName = "";
+            string storedProcedureName = "GetOrderById";
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
@@ -64,7 +64,7 @@ namespace Insiders_Test_Project.DataProviders.StoredProcedureProviders
         }
         public ICollection<Order> GetAllOrders()
         {
-            string storedProcedureName = "";
+            string storedProcedureName = "GetAllOrders";
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
@@ -93,7 +93,7 @@ namespace Insiders_Test_Project.DataProviders.StoredProcedureProviders
         {
             GetOrderById(OrderId);
             _productDataProvider.GetProductById(ProductId);
-            string storedProcedureName = "";
+            string storedProcedureName = "AddProduct";
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
@@ -115,7 +115,7 @@ namespace Insiders_Test_Project.DataProviders.StoredProcedureProviders
         {
             GetOrderById(OrderId);
             _productDataProvider.GetProductById(ProductId);
-            string storedProcedureName = "";
+            string storedProcedureName = "RemoveProduct";
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
@@ -136,7 +136,7 @@ namespace Insiders_Test_Project.DataProviders.StoredProcedureProviders
         public bool DeleteOrder(Guid Id)
         {
 
-            string storedProcedureName = "";
+            string storedProcedureName = "DeleteOrder";
             using (var connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
