@@ -36,8 +36,6 @@ namespace WinFormProject1
                 container.Resolve<UserManager>(),
                 container.Resolve<OrderManager>(),
                 container.Resolve<Taxrate>()));
-            container.Register<TaxrateForm>(() => new TaxrateForm(
-                container.Resolve<Taxrate>()));
 
             container.Register<UserManager>(() => new UserManager(
                 container.Resolve<IUserDataProvider>(), container.Resolve<UserValidator>()));
