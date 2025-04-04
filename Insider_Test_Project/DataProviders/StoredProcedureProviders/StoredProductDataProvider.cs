@@ -30,7 +30,9 @@ namespace Insiders_Test_Project.DataProviders.StoredProcedureProviders
                     command.Parameters.Add(new SqlParameter("@OutputParameter", SqlDbType.Int));
                     command.Parameters["@OutputParameter"].Direction = ParameterDirection.ReturnValue;
                     command.ExecuteNonQuery();
-                    return (int)command.Parameters["@OutputParameter"].Value == 0;
+                    if ((int)command.Parameters["@OutputParameter"].Value != 0)
+                        throw new InvalidOperationException("Failed insert the product to DB.");
+                    return true;
                 }
             }
         }
@@ -118,8 +120,9 @@ namespace Insiders_Test_Project.DataProviders.StoredProcedureProviders
 
                     command.ExecuteNonQuery();
 
-                    int result = (int)command.Parameters["@OutputParameter"].Value;
-                    return (result == 0);
+                    if ((int)command.Parameters["@OutputParameter"].Value != 0)
+                        throw new InvalidOperationException("Failed to update the product from DB.");
+                    return true;
                 }
             }
         }
@@ -138,7 +141,9 @@ namespace Insiders_Test_Project.DataProviders.StoredProcedureProviders
                     command.Parameters.Add(new SqlParameter("@OutputParameter", SqlDbType.Int));
                     command.Parameters["@OutputParameter"].Direction = ParameterDirection.ReturnValue;
                     command.ExecuteNonQuery();
-                    return (int)command.Parameters["@OutputParameter"].Value == 0;
+                    if ((int)command.Parameters["@OutputParameter"].Value != 0)
+                        throw new InvalidOperationException("Failed to delete the product from DB.");
+                    return true;
                 }
             }
         }
