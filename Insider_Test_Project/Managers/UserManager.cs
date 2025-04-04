@@ -41,6 +41,7 @@ namespace Insiders_Test_Project.Managers
         }
         public bool Updateuser(Guid UserId, User user)
         {
+            //_userValidator.ValidateAndThrow(user);
             return _userDataProvider.UpdateUser(UserId, user);
         }
 

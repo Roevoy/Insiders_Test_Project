@@ -1,4 +1,6 @@
-﻿using Insiders_Test_Project.DataProviders.Interfaces;
+﻿using FluentValidation;
+using Insiders_Test_Project.DataProviders.Interfaces;
+using Insiders_Test_Project.Managers.Validators;
 using Insiders_Test_Project.Models;
 
 namespace Insiders_Test_Project.Managers
@@ -6,8 +8,10 @@ namespace Insiders_Test_Project.Managers
     public class ProductManager
     {
         private readonly IProductDataProvider _provider;
-        public ProductManager(IProductDataProvider provider)
+        private readonly ProductValidator _validator;
+        public ProductManager(IProductDataProvider provider, ProductValidator validator)
         {
+            _validator = validator;
             _provider = provider;
         }
         public Guid CreateProduct(string name, string description, double price)
@@ -20,6 +24,7 @@ namespace Insiders_Test_Project.Managers
                 Price = price
                 
             };
+            _validator.ValidateAndThrow(product);
             _provider.InsertProduct(product);
             return product.Id;
         }

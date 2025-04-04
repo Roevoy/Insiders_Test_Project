@@ -33,11 +33,11 @@ namespace WinFormProject1
             container.Register<UserManager>(() => new UserManager(
                 container.Resolve<IUserDataProvider>(), container.Resolve<UserValidator>()));
             container.Register<CustomerManager>(() => new CustomerManager(
-                container.Resolve<ICustomerDataProvider>()));
+                container.Resolve<ICustomerDataProvider>(), container.Resolve<CustomerValidator>()));
             container.Register<ProductManager>(() => new ProductManager(
-                container.Resolve<IProductDataProvider>()));
+                container.Resolve<IProductDataProvider>(), container.Resolve<ProductValidator>()));
             container.Register<OrderManager>(() => new OrderManager(
-                container.Resolve<IOrderDataProvider>()));
+                container.Resolve<IOrderDataProvider>(), container.Resolve<OrderValidator>()));
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();

@@ -1,14 +1,18 @@
-﻿using Insiders_Test_Project.DataProviders.Interfaces;
+﻿using FluentValidation;
+using Insiders_Test_Project.DataProviders.Interfaces;
+using Insiders_Test_Project.Managers.Validators;
 using Insiders_Test_Project.Models;
 
 namespace Insiders_Test_Project.Managers
 {
     public class OrderManager
     {
+        private readonly OrderValidator _validator; 
         private readonly IOrderDataProvider _provider;
-        public OrderManager(IOrderDataProvider provider)
+        public OrderManager(IOrderDataProvider provider, OrderValidator validator)
         {
             _provider = provider;
+            _validator = validator;
         }
         public Guid CreateOrder(Guid CustomerId)
         {
@@ -18,6 +22,7 @@ namespace Insiders_Test_Project.Managers
                 CreatedDate = DateTime.Now,
                 CustomerId = CustomerId
             };
+            _validator.ValidateAndThrow(order);
             _provider.InsertOrder(order);
             return order.Id;
         }
