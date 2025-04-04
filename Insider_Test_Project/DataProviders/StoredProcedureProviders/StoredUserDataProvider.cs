@@ -33,8 +33,9 @@ namespace Insiders_Test_Project.DataProviders.StoredProcedureProviders
 
                     command.ExecuteNonQuery();
 
-                    int result = (int)command.Parameters["@OutputParameter"].Value;
-                    return (result == 0);
+                    if ((int)command.Parameters["@OutputParameter"].Value != 0)
+                        throw new InvalidOperationException("Failed to insert the user to DB.");
+                    return true;
                 }
             }
         }
@@ -125,8 +126,9 @@ namespace Insiders_Test_Project.DataProviders.StoredProcedureProviders
 
                     command.ExecuteNonQuery();
 
-                    int result = (int)command.Parameters["@OutputParameter"].Value;
-                    return (result == 0);
+                    if ((int)command.Parameters["@OutputParameter"].Value != 0)
+                        throw new InvalidOperationException("Failed to update the user in DB.");
+                    return true;
                 }
             }
         }
@@ -149,8 +151,9 @@ namespace Insiders_Test_Project.DataProviders.StoredProcedureProviders
 
                     command.ExecuteNonQuery();
 
-                    int result = (int)command.Parameters["@OutputParameter"].Value;
-                    return (result == 0);
+                    if ((int)command.Parameters["@OutputParameter"].Value != 0)
+                        throw new InvalidOperationException("Failed to delete the user from DB.");
+                    return true;
                 }
             }
         }
