@@ -10,13 +10,15 @@ namespace Insiders_Test_Project.Views.Order
             InitializeComponent();
             this.Load += OrderForm_Load;
             this.OrdersGridView.SelectionChanged += OrdersGridView_SelectionChanged;
+            this.AddProductBtn.Click += AddProductBtn_Click;
             _orderManager = orderManager;
 
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void AddProductBtn_Click(object sender, EventArgs e)
         {
-
+            var form = new AddProductForm(_orderManager);
+            form.ShowDialog();
         }
 
         private void OrderForm_Load(object sender, EventArgs e)

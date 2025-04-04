@@ -1,13 +1,5 @@
 ﻿using Insiders_Test_Project.Managers;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+
 
 namespace Insiders_Test_Project.Views.Order
 {
@@ -16,6 +8,7 @@ namespace Insiders_Test_Project.Views.Order
         private readonly OrderManager _orderManager;
         public RemoveProductForm(OrderManager orderManager)
         {
+            InitializeComponent();
             _orderManager = orderManager;
         }
 
@@ -26,9 +19,14 @@ namespace Insiders_Test_Project.Views.Order
                 var OrderId = Guid.Parse(textBox1.Text);
                 var ProductId = Guid.Parse(textBox2.Text);
                 _orderManager.RemoveProduct(OrderId, ProductId);
-                MessageBox.Show("Product was added.");
+                MessageBox.Show("Product was removed.");
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

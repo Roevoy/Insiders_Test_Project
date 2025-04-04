@@ -102,7 +102,7 @@ namespace Insiders_Test_Project.DataProviders.StoredProcedureProviders
                     command.Parameters.Add(new SqlParameter("@ProductId", SqlDbType.UniqueIdentifier));
                     command.Parameters["@ProductId"].Value = ProductId;
                     command.Parameters.Add(new SqlParameter("@OutputParameter", SqlDbType.Int));
-                    command.Parameters["@OutputParameter"].Direction = ParameterDirection.ReturnValue;
+                    command.Parameters["@OutputParameter"].Direction = ParameterDirection.Output;
                     command.ExecuteNonQuery();
                     if ((int)command.Parameters["@OutputParameter"].Value != 0)
                         throw new InvalidOperationException("Failed add product to order in DB.");
@@ -124,7 +124,7 @@ namespace Insiders_Test_Project.DataProviders.StoredProcedureProviders
                     command.Parameters.Add(new SqlParameter("@ProductId", SqlDbType.UniqueIdentifier));
                     command.Parameters["@ProductId"].Value = ProductId;
                     command.Parameters.Add(new SqlParameter("@OutputParameter", SqlDbType.Int));
-                    command.Parameters["@OutputParameter"].Direction = ParameterDirection.ReturnValue;
+                    command.Parameters["@OutputParameter"].Direction = ParameterDirection.Output;
                     command.ExecuteNonQuery();
                     if ((int)command.Parameters["@OutputParameter"].Value != 0)
                         throw new InvalidOperationException("Failed to remove the product from the order in DB.");

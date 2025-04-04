@@ -109,7 +109,7 @@
             SubstrctOrderBtn.TabIndex = 9;
             SubstrctOrderBtn.Text = "- Product";
             SubstrctOrderBtn.UseVisualStyleBackColor = true;
-            SubstrctOrderBtn.Click += button2_Click;
+            SubstrctOrderBtn.Click += SubstrctOrderBtn_Click;
             // 
             // AddProductBtn
             // 
@@ -119,7 +119,7 @@
             AddProductBtn.TabIndex = 9;
             AddProductBtn.Text = "+ Product";
             AddProductBtn.UseVisualStyleBackColor = true;
-            AddProductBtn.Click += button2_Click;
+
             // 
             // OrderForm
             // 
@@ -139,6 +139,12 @@
             Load += OrderForm_Load;
             ((System.ComponentModel.ISupportInitialize)OrdersGridView).EndInit();
             ResumeLayout(false);
+        }
+
+        private void SubstrctOrderBtn_Click(object sender, EventArgs e)
+        {
+            var form = new RemoveProductForm(_orderManager);
+            form.ShowDialog();
         }
 
         #endregion
