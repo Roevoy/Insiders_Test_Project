@@ -1,9 +1,11 @@
+using ClassLibraryIntegration;
 using Insiders_Test_Project;
 using Insiders_Test_Project.DataProviders.Interfaces;
 using Insiders_Test_Project.DataProviders.StoredProcedureProviders;
 using Insiders_Test_Project.Managers;
 using Insiders_Test_Project.Managers.Validators;
 using Insiders_Test_Project.Views;
+using Insiders_Test_Project.Views.Taxrate;
 
 namespace WinFormProject1
 {
@@ -28,8 +30,15 @@ namespace WinFormProject1
             container.Register<IProductDataProvider, StoredProductDataProvider>();
             container.Register<IOrderDataProvider, StoredOrderDataProvider>();
 
+            container.Register<Taxrate>(() => new Taxrate());
+
             container.Register<MainForm>(() => new MainForm(
-                container.Resolve<UserManager>(), container.Resolve<OrderManager>()));
+                container.Resolve<UserManager>(),
+                container.Resolve<OrderManager>(),
+                container.Resolve<Taxrate>()));
+            container.Register<TaxrateForm>(() => new TaxrateForm(
+                container.Resolve<Taxrate>()));
+
             container.Register<UserManager>(() => new UserManager(
                 container.Resolve<IUserDataProvider>(), container.Resolve<UserValidator>()));
             container.Register<CustomerManager>(() => new CustomerManager(

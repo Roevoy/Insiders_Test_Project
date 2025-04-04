@@ -1,3 +1,4 @@
+using ClassLibraryIntegration;
 using Insiders_Test_Project;
 using Insiders_Test_Project.DataProviders.Interfaces;
 using Insiders_Test_Project.Managers;
@@ -11,11 +12,13 @@ namespace Insiders_Test_Project.Views
     {
         private readonly UserManager _userManager;
         private readonly OrderManager _orderManager;
-        public MainForm(UserManager userManager, OrderManager orderManager)
+        private readonly ClassLibraryIntegration.Taxrate _taxrate;
+        public MainForm(UserManager userManager, OrderManager orderManager, ClassLibraryIntegration.Taxrate taxrate)
         {
-            _userManager = userManager;
             InitializeComponent();
+            _userManager = userManager;
             _orderManager = orderManager;
+            _taxrate = taxrate; 
         }
 
         private void UsersButton_Click(object sender, EventArgs e)
@@ -37,7 +40,7 @@ namespace Insiders_Test_Project.Views
 
         private void button2_Click(object sender, EventArgs e)
         {
-            var form = new TaxrateForm();
+            var form = new TaxrateForm(_taxrate);
             form.Show();
         }
     }

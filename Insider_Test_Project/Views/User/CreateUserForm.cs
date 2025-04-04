@@ -1,6 +1,4 @@
 ﻿using Insiders_Test_Project.Managers;
-using Insiders_Test_Project.Views;
-using System.Windows.Forms;
 
 namespace Insiders_Test_Project.Views.User
 {
@@ -13,7 +11,6 @@ namespace Insiders_Test_Project.Views.User
             _dataGridView = dataGrodView;
             _userManager = userManager;
             InitializeComponent();
-
         }
         private void button1_Click(object sender, EventArgs e)
         {
@@ -36,6 +33,11 @@ namespace Insiders_Test_Project.Views.User
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox3_TextChanged(object sender, EventArgs e)
         {
 
         }
