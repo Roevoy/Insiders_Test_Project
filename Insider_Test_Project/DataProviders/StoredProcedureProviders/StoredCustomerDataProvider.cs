@@ -9,11 +9,8 @@ namespace Insiders_Test_Project.DataProviders.StoredProcedureProviders
     public class StoredCustomerDataProvider : ICustomerDataProvider
     {
         private readonly string _connectionString = Program.ConnectionString;
-        private readonly IUserDataProvider _userDataProvider;
         public bool InsertCustomer(Customer customer)
-        {
-            _userDataProvider.GetUserById(customer.UserId);
-            
+        {   
             string storedProcedureName = "InsertCustomer";
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
