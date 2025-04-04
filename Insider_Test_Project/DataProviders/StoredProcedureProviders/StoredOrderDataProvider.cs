@@ -27,7 +27,9 @@ namespace Insiders_Test_Project.DataProviders.StoredProcedureProviders
                     command.Parameters.Add(new SqlParameter("@OutputParameter", SqlDbType.Int));
                     command.Parameters["@OutputParameter"].Direction = ParameterDirection.Output;
                     command.ExecuteNonQuery();
-                    return (int)command.Parameters["@OutputParameter"].Value == 0;
+                    if ((int)command.Parameters["@OutputParameter"].Value != 0)
+                        throw new InvalidOperationException("Failed insert the order to DB.");
+                    return true;
                 }
             }
         }
@@ -102,7 +104,9 @@ namespace Insiders_Test_Project.DataProviders.StoredProcedureProviders
                     command.Parameters.Add(new SqlParameter("@OutputParameter", SqlDbType.Int));
                     command.Parameters["@OutputParameter"].Direction = ParameterDirection.ReturnValue;
                     command.ExecuteNonQuery();
-                    return (int)command.Parameters["@OutputParameter"].Value == 0;
+                    if ((int)command.Parameters["@OutputParameter"].Value != 0)
+                        throw new InvalidOperationException("Failed add product to order in DB.");
+                    return true;
                 }
             }
         }
@@ -122,7 +126,9 @@ namespace Insiders_Test_Project.DataProviders.StoredProcedureProviders
                     command.Parameters.Add(new SqlParameter("@OutputParameter", SqlDbType.Int));
                     command.Parameters["@OutputParameter"].Direction = ParameterDirection.ReturnValue;
                     command.ExecuteNonQuery();
-                    return (int)command.Parameters["@OutputParameter"].Value == 0;
+                    if ((int)command.Parameters["@OutputParameter"].Value != 0)
+                        throw new InvalidOperationException("Failed to remove the product from the order in DB.");
+                    return true;
                 }
             }
         }
@@ -141,7 +147,9 @@ namespace Insiders_Test_Project.DataProviders.StoredProcedureProviders
                     command.Parameters.Add(new SqlParameter("@OutputParameter", SqlDbType.Int));
                     command.Parameters["@OutputParameter"].Direction = ParameterDirection.Output;
                     command.ExecuteNonQuery();
-                    return (int)command.Parameters["@OutputParameter"].Value == 0;
+                    if ((int)command.Parameters["@OutputParameter"].Value != 0)
+                        throw new InvalidOperationException("Failed to delete the order from DB.");
+                    return true;
                 }
             }
         }

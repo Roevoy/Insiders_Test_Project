@@ -29,7 +29,9 @@ namespace Insiders_Test_Project.DataProviders.StoredProcedureProviders
                     command.Parameters.Add(outputParameter);
 
                     command.ExecuteNonQuery();
-                    return (int)command.Parameters["@OutputParameter"].Value == 0;
+                    if ((int)command.Parameters["@OutputParameter"].Value != 0)
+                        throw new InvalidOperationException("Failed insert the customer to DB.");
+                    return true;
                 }
             }
         }
@@ -108,7 +110,9 @@ namespace Insiders_Test_Project.DataProviders.StoredProcedureProviders
                     command.Parameters.Add(new SqlParameter("@OutputParameter", SqlDbType.Int));
                     command.Parameters["@OutputParameter"].Direction = ParameterDirection.ReturnValue;
                     command.ExecuteNonQuery();
-                    return (int)command.Parameters["@OutputParameter"].Value == 0;
+                    if ((int)command.Parameters["@OutputParameter"].Value != 0)
+                        throw new InvalidOperationException("Failed to delete the customer from DB.");
+                    return true;
                 }
             }
         }
