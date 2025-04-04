@@ -3,7 +3,7 @@ using Insiders_Test_Project.Models;
 
 namespace Insiders_Test_Project.Managers.Validators
 {
-    internal class UserValidator : AbstractValidator<User>
+    public class UserValidator : AbstractValidator<User>
     {
         public UserValidator() 
         {

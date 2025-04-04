@@ -1,4 +1,6 @@
-﻿using Insiders_Test_Project.DataProviders.Interfaces;
+﻿using FluentValidation;
+using Insiders_Test_Project.DataProviders.Interfaces;
+using Insiders_Test_Project.Managers.Validators;
 using Insiders_Test_Project.Models;
 
 namespace Insiders_Test_Project.Managers
@@ -6,8 +8,10 @@ namespace Insiders_Test_Project.Managers
     public class UserManager
     {
         private readonly IUserDataProvider _userDataProvider;
-        public UserManager (IUserDataProvider userDataProvider)
+        private readonly UserValidator _userValidator;
+        public UserManager (IUserDataProvider userDataProvider, UserValidator userValidator)
         {
+            _userValidator = userValidator;
             _userDataProvider = userDataProvider;
         }
         public Guid CreateUser(string Name, string Email, string Password) 
@@ -19,6 +23,7 @@ namespace Insiders_Test_Project.Managers
                 Email = Email,
                 PasswordHash = BCrypt.Net.BCrypt.HashPassword(Password)
             };
+            _userValidator.ValidateAndThrow(user);
             _userDataProvider.InsertUser(user);
             return user.Id;
         }

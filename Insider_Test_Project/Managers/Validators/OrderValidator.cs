@@ -5,7 +5,7 @@ using Insiders_Test_Project.Models;
 
 namespace Insiders_Test_Project.Managers.Validators
 {
-    internal class OrderValidator : AbstractValidator<Order>
+    public class OrderValidator : AbstractValidator<Order>
     {
         public OrderValidator() {
 
